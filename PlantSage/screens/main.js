@@ -66,6 +66,10 @@ export default function Main({ navigation }) {
     }
   };
 
+  const cancel = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <ScrollView
       style={styles.container}
@@ -87,17 +91,25 @@ export default function Main({ navigation }) {
             />
           </View>
           <View style={styles.imageButtonContainer}>
-            <Button
-              theme="primary"
-              label="Choose a photo"
-              onPress={pickImageAsync}
-            />
-            <Button
-              theme="primary"
-              label="Identify from this photo"
-              onPress={onIdentifyPlantClick}
-              disabled={identifyButtonDisabled}
-            />
+            {!selectedImage && (
+              <Button
+                theme="primary"
+                label="Choose a photo"
+                iconName="image"
+                onPress={pickImageAsync}
+              />
+            )}
+            {selectedImage && (
+              <View>
+                <Button
+                  theme="primary"
+                  label="Identify"
+                  iconName="seedling"
+                  onPress={onIdentifyPlantClick}
+                />
+                <Button label="Cancel" onPress={cancel} />
+              </View>
+            )}
           </View>
         </View>
       )}
