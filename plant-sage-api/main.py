@@ -68,14 +68,14 @@ def generate_info_and_care_routine(plant_species: str, response: Response):
         return {"status": "error", "message": "Internal server error"}
 
 
-def _identify_plant(image: bytes) -> list[dict]:
-    plant_species = []
+def _identify_plant(image: bytes) -> dict:
+    plant_species = {"suggestions": []}
 
     image_b64 = base64.encodebytes(image).decode("utf-8")
     images = [f"data:image/jpg;base64,{image_b64}"]
 
     headers = {"Api-Key": _plantid_api_key, "Content-Type": "application/json"}
-    data = {"images": images}
+    data = {"images": images, "similar_images": True}
     response = requests.post(
         "https://plant.id/api/v3/identification", headers=headers, data=json.dumps(data)
     )
@@ -83,7 +83,9 @@ def _identify_plant(image: bytes) -> list[dict]:
     plant_id_data = response.json()
     log.info("Retrieved plant id data :: %s", plant_id_data)
 
-    suggestions = plant_id_data["result"]["classification"]["suggestions"]
+    result = plant_id_data["result"]
+    plant_species["is_plant"] = result["is_plant"]
+    suggestions = result["classification"]["suggestions"]
     if len(suggestions) > 0:
         for suggestion in suggestions:
             name = suggestion["name"]
@@ -92,7 +94,7 @@ def _identify_plant(image: bytes) -> list[dict]:
             log.info("Suggestion name :: %s", name)
             log.info("Suggestion probability :: %s", probability)
 
-            plant_species.append({"name": name, "probability": probability})
+            plant_species["suggestions"].append(suggestion)
 
     log.info("Determined plant species :: %s", plant_species)
 

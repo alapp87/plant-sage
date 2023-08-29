@@ -4,6 +4,7 @@ import {
   View,
   FlatList,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { generateInfoAndCareRoutine } from "../api";
@@ -35,6 +36,22 @@ export default function Suggestions({ navigation }) {
     );
   };
 
+  const roundPercentage = (percentage) => {
+    return (percentage * 100).toFixed(1);
+  };
+
+  const buildPlantThumbnailImage = (item) => {
+    console.log("Buildin thumbnail for ", item);
+    if (item && item.similar_images) {
+      return (
+        <Image
+          src={item.similar_images[0].url_small}
+          style={styles.suggestionThumbnailImage}
+        />
+      );
+    }
+  };
+
   return (
     <View style={styles.container}>
       {isLoading && (
@@ -45,14 +62,17 @@ export default function Suggestions({ navigation }) {
       )}
       {!isLoading && (
         <FlatList
-          data={plantSuggestions}
+          data={plantSuggestions.suggestions}
           renderItem={({ item }) => (
-            <Text
-              style={styles.item}
-              onPress={() => onSuggestionPress(item.name)}
-            >
-              {item.name} ({item.probability * 100}%)
-            </Text>
+            <View style={styles.itemContainer}>
+              <Text
+                style={styles.item}
+                onPress={() => onSuggestionPress(item.name)}
+              >
+                {item.name} ({roundPercentage(item.probability)}%)
+              </Text>
+              {buildPlantThumbnailImage(item)}
+            </View>
           )}
         />
       )}
@@ -66,10 +86,17 @@ const styles = StyleSheet.create({
     paddingTop: 22,
     backgroundColor: "#25292e",
   },
-  item: {
+  itemContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     padding: 10,
+    height: 60,
+  },
+  item: {
+    // padding: 10,
     fontSize: 18,
-    height: 50,
+    // height: 60,
     color: "#fff",
   },
   loadingContainer: {
@@ -79,5 +106,11 @@ const styles = StyleSheet.create({
   loadingText: {
     color: "#fff",
     fontSize: 18,
+  },
+  suggestionThumbnailImage: {
+    alignSelf: "center",
+    width: 58,
+    height: 58,
+    borderRadius: 5,
   },
 });
