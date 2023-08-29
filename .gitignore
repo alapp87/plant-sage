@@ -78,3 +78,5 @@ yarn-error.*
 .vscode/
 __pycache__/
 .venv/
+.env
+config/index.ts
