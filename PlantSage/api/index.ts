@@ -57,58 +57,58 @@ export function identifyPlantByImage(imageUri: string): Promise<object> {
         },
       };
 
-      // fetch(apiUrl, options)
-      //   .then((response) => {
-      //     return response.json();
-      //   })
-      //   .then((data) => {
-      //     console.log(`data = ${JSON.stringify(data)}`);
-      //     resolve(data);
-      //   })
-      //   .catch((reason) => {
-      //     reject(reason);
-      //   });
-      const data = {
-        plant_species: {
-          suggestions: [
-            {
-              id: "f12b23ca000d0506",
-              name: "Epipremnum aureum",
-              probability: 0.99937207,
-              similar_images: [
-                {
-                  id: "81860d3c35016b52f5874efdbe03467f592ac26c",
-                  url: "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/818/60d3c35016b52f5874efdbe03467f592ac26c.jpeg",
-                  similarity: 0.695,
-                  url_small:
-                    "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/818/60d3c35016b52f5874efdbe03467f592ac26c.small.jpeg",
-                },
-                {
-                  id: "fb7e07c7c8e5ba07ccabcc4e16146fc9168d2061",
-                  url: "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fb7/e07c7c8e5ba07ccabcc4e16146fc9168d2061.jpeg",
-                  license_name: "CC BY 4.0",
-                  license_url: "https://creativecommons.org/licenses/by/4.0/",
-                  citation: "Bennett Grappone",
-                  similarity: 0.65,
-                  url_small:
-                    "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fb7/e07c7c8e5ba07ccabcc4e16146fc9168d2061.small.jpeg",
-                },
-              ],
-              details: {
-                language: "en",
-                entity_id: "f12b23ca000d0506",
-              },
-            },
-          ],
-          is_plant: {
-            probability: 1.0,
-            binary: true,
-            threshold: 0.5,
-          },
-        },
-      };
-      console.log(`data = ${JSON.stringify(data)}`);
-      setTimeout(() => resolve(data), 4000);
+      fetch(apiUrl, options)
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(`data = ${JSON.stringify(data)}`);
+          resolve(data);
+        })
+        .catch((reason) => {
+          reject(reason);
+        });
+      // const data = {
+      //   plant_species: {
+      //     suggestions: [
+      //       {
+      //         id: "f12b23ca000d0506",
+      //         name: "Epipremnum aureum",
+      //         probability: 0.99937207,
+      //         similar_images: [
+      //           {
+      //             id: "81860d3c35016b52f5874efdbe03467f592ac26c",
+      //             url: "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/818/60d3c35016b52f5874efdbe03467f592ac26c.jpeg",
+      //             similarity: 0.695,
+      //             url_small:
+      //               "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/818/60d3c35016b52f5874efdbe03467f592ac26c.small.jpeg",
+      //           },
+      //           {
+      //             id: "fb7e07c7c8e5ba07ccabcc4e16146fc9168d2061",
+      //             url: "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fb7/e07c7c8e5ba07ccabcc4e16146fc9168d2061.jpeg",
+      //             license_name: "CC BY 4.0",
+      //             license_url: "https://creativecommons.org/licenses/by/4.0/",
+      //             citation: "Bennett Grappone",
+      //             similarity: 0.65,
+      //             url_small:
+      //               "https://plant-id.ams3.cdn.digitaloceanspaces.com/similar_images/3/fb7/e07c7c8e5ba07ccabcc4e16146fc9168d2061.small.jpeg",
+      //           },
+      //         ],
+      //         details: {
+      //           language: "en",
+      //           entity_id: "f12b23ca000d0506",
+      //         },
+      //       },
+      //     ],
+      //     is_plant: {
+      //       probability: 1.0,
+      //       binary: true,
+      //       threshold: 0.5,
+      //     },
+      //   },
+      // };
+      // console.log(`data = ${JSON.stringify(data)}`);
+      // setTimeout(() => resolve(data), 4000);
     } catch (error) {
       console.error("An error occurred identifying plant by image ::", error);
       reject(error);
