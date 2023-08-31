@@ -9,6 +9,10 @@ The project is separated into frontend and backend projects:
 - plant-sage-api
   - Backend API service built using Python and FastAPI
 
+## Demo
+
+![Plant Sage Mobile Demo](https://github.com/alapp87/plant-sage/blob/main/PlantSage/demo/plant-sage-mobile-demo.gif)
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
