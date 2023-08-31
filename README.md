@@ -11,8 +11,7 @@ The project is separated into frontend and backend projects:
 
 ## Demo
 
-![Plant Sage Mobile Demo]()
-<img src="https://github.com/alapp87/plant-sage/blob/main/PlantSage/demo/plant-sage-mobile-demo.gif" width="100" />
+<img src="https://github.com/alapp87/plant-sage/blob/main/PlantSage/demo/plant-sage-mobile-demo.gif" width="250" />
 
 ## License
 
